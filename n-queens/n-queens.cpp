@@ -1,5 +1,6 @@
 class Solution {
 public:
+        // TC: O(n^2)
         vector<vector<string>>ans;
         vector<pair<int,int>>queens_pos;
         void push_answer(int n){
@@ -12,23 +13,21 @@ public:
                 }
                 ans.push_back(temp);
         }
-        bool isAttacking(int x,int y,int n){
+        bool isAttacking(int x,int y){
                 for(auto pii:queens_pos){
                      int i= pii.first;
                         int j=pii.second;
                         if(i==x || j==y)return true;
-                        for(int t=1;t<n;t++){
+                        for(int t=1;t<=x;t++){
                         if((i+t==x || i-t==x) && (j+t==y || j-t==y))return true;
                         }                   
                 }
                 return false;
         }
         void backtrack(int row,int n){
-                if(row==n){
-                       push_answer( n);
-                }
+                if(row==n)push_answer(n);
                 for(int i=0;i<n;i++){
-                        if(!isAttacking(row,i,n)){
+                        if(!isAttacking(row,i)){
                                 queens_pos.push_back({row,i});
                                 backtrack(row+1,n);
                                 queens_pos.pop_back();
