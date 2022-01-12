@@ -1,13 +1,32 @@
 class Solution {
-        // One - Liner Solution
+        // Tabulation Approach
+        // TC: O(N)
+        // SC: O(N)
 public:
-    int dp[101]{[0 ... 100]=-1};
-    int rob(vector<int>& nums,int i=0) {
-        return i<size(nums)?dp[i]!=-1?dp[i]:dp[i]=max(rob(nums,i+1),rob(nums,i+2)+nums[i]):0;
+    int rob(vector<int>& nums) {
+            if(nums.size()==1)return nums[0];
+        vector<int>dp(nums);
+            dp[1]=max(nums[0],nums[1]);
+            for(int i=2;i<size(nums);i++){
+                    dp[i]=max(dp[i-1],nums[i]+dp[i-2]);
+            }
+            return dp[nums.size()-1];
     }
 };
 
+
 // class Solution {
+//         // One - Liner Solution
+// public:
+//     int dp[101]{[0 ... 100]=-1};
+//     int rob(vector<int>& nums,int i=0) {
+//         return i<size(nums)?dp[i]!=-1?dp[i]:dp[i]=max(rob(nums,i+1),rob(nums,i+2)+nums[i]):0;
+//     }
+// };
+
+
+// class Solution {
+//          // Memoziation Approach
 //         // TC: O(N)
 //         // SC: O(N) ->space taken by implicit recursive stack
 //         // N-> max depth of recursion
