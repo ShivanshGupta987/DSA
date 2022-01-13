@@ -9,7 +9,8 @@
 class Solution {
 public:
     int numSquares(int n) {
-            vector<int>least_req_per_square(n+1,INT_MAX);
+            static vector<int>least_req_per_square(1e4+1,INT_MAX);
+            if(least_req_per_square[n]!=INT_MAX)return least_req_per_square[n];
             least_req_per_square[0]=0;
             for(int i=1;i<=n;i++){
                     // to sum up i we me must have perfect square j*j  and some no. i-j*j(which can be perfect or non-perfect)
