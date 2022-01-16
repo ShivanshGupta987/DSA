@@ -24,14 +24,33 @@ public:
             
             if(sum<abs(target) || (target+sum)%2==1)return 0;
             int new_sum=(target+sum)/2;  
-            vector<int>dp(new_sum+1,0);
-            dp[0]=1;
-            for(int n:nums){
-                     for(int j=new_sum;j>=n;j--){
-                            dp[j]+=dp[j-n]; 
-                     }
+            // vector<int>dp(new_sum+1,0);
+            // dp[0]=1;
+            // for(int n:nums){
+            //          for(int j=new_sum;j>=n;j--){
+            //                 dp[j]+=dp[j-n]; 
+            //                  cout<<dp[j]<<" ";
+            //          }
+            //         cout<<endl;
+            // }
+            // return dp[new_sum];
+            
+            
+            int n=nums.size();
+            vector<vector<int>>dp(n+1,vector<int>(new_sum+1,0));
+            for(int i=0;i<n+1;i++)dp[i][0]=1;
+            for(int i=1;i<n+1;i++){
+                    for(int j=0;j<=new_sum;j++){
+                         if(j==0 && nums[i-1]==0)dp[i][j]=2*dp[i-1][j];
+ else if(nums[i-1]<=j) dp[i][j]+= (dp[i-1][j] + dp[i-1][j-nums[i-1]]);
+         else dp[i][j]=dp[i-1][j];
+                    }
             }
-            return dp[new_sum];
+            for(auto x:dp){
+                    for(auto y:x)cout<<y<<" ";
+                    cout<<endl;
+            }
+            return dp[n][new_sum];
             
     }
 };
