@@ -1,15 +1,19 @@
 class Solution {
         // TC: O(N^2)
         // SC: O(N)
+        
 public:
+    int mem[1001]={[0 ... 1000]=0};
     int minSteps(int n) {
-        vector<int>mem(n+1,0);
-            for(int i=0;i<n+1;i++)mem[i]=i;
-            mem[1]=0;
+            if(n==1)return 0;
+            if(mem[n]!=0)return mem[n];
+        
+            for(int i=0;i<1001;i++)mem[i]=i;
+
             mem[0]=mem[1]=0;
-           for(int i=2;i<n+1;i++){
+           for(int i=2;i<1001;i++){
                    int minn=mem[i];
-                   for(int j=2;j<=500;j++){
+                   for(int j=2;j<=34;j++){
                            if(i%j==0){
                                    minn=min(minn,mem[i/j]+ j);
                                    break;
@@ -20,9 +24,6 @@ public:
            }
             return mem[n];
     }
-        int operations(int a,int b){
-                if((b-a)%a==0)return (b/a);
-                else return 0;
-        }
+        
         
 };
