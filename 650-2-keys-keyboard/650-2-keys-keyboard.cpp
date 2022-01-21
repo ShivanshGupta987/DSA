@@ -9,12 +9,13 @@ public:
             mem[0]=mem[1]=0;
            for(int i=2;i<n+1;i++){
                    int minn=mem[i];
-             for(int j=1;j<=i;j++){
-                 if(operations(j,i)!=0){
-                         minn=min(minn,mem[j]+operations(j,i));
-                         
-                 }    
-             }
+                   for(int j=2;j<=500;j++){
+                           if(i%j==0){
+                                   minn=min(minn,mem[i/j]+ j);
+                                   break;
+                           }
+                          
+                   }
                    mem[i]=minn;
            }
             return mem[n];
