@@ -5,7 +5,7 @@ class Solution {
 public:
     int numOfSubarrays(vector<int>& arr) {
         int count =0;
-          unordered_map<int,int>mp{{0,1},{1,0}};
+         int mp[2]={1,0};
             int sum=0;
             for(auto x :arr){
                     sum=(sum+x)%2;
