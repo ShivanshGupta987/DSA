@@ -1,24 +1,15 @@
 class Solution {
-        // TC: O(N logN)
+        // TC : O(N)  // N-> arr.size()
         // SC: O(1)
 public:
     vector<int> twoSum(vector<int>& arr, int target) {
-            int n=arr.size();
-            
-            for(int i=0;i<n;i++)
-            {
-                    int find=target-arr[i];
-                    
-                    int l=i+1,r=n-1;
-                    while(l<=r){
-                            int mid=l+(r-l)/2;
-                            if(arr[mid]<find){
-                                    l=mid+1;  
-                            }
-                            else if(arr[mid]==find)return {i+1,mid+1};
-                            else r=mid-1;
-                    }
+         int n=arr.size();
+            int l=0,r=n-1;
+            while(l<r){
+               if(arr[l]+arr[r]==target)return {l+1,r+1};
+               else if(arr[l]+arr[r]>target)r--;
+                    else l++;
             }
-        return {-1,-1};
+            return {};
     }
 };
