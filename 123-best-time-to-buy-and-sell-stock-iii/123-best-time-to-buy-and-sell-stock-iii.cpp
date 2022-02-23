@@ -1,19 +1,52 @@
 class Solution {
-        // TC:O(N*K)
-        // SC:O(N*K)  
-        // K-> total no. of tranasactions
 public:
+    
     int maxProfit(vector<int>& prices) {
-        const int k=2;
-        int n=prices.size();
-        vector<vector<int>>dp(k+1,vector<int>(n,0));
-       for(int i=1;i<=k;i++){
-               int max_diff=-prices[0];
-               for(int j=1;j<n;j++){   
-                    dp[i][j]=max(dp[i][j-1],prices[j]+max_diff);
-                    max_diff=max(max_diff,dp[i-1][j]-prices[j]);
-               }
-       }
-      return dp[k][n-1];      
+        
+        int dp[prices.size()+1 ][5];
+        reverse(prices.begin(),prices.end());
+        
+        for(int day = 0; day<=prices.size(); day++){
+            
+            for(int transactionsDone = 0;transactionsDone <= 4;transactionsDone++){
+                
+                int &ans = dp[day][transactionsDone];
+                
+                if(day ==0){
+                    ans = 0;
+                }else if(transactionsDone == 0){
+                    ans = 0;
+                }else{
+                    
+                    // choice 1
+                    // no transaction today
+                    int ans1 = dp[day-1][transactionsDone];
+                    
+                    // choice 2
+                    // doing the possible transaction today     
+                    int ans2 = 0;
+                    bool buy = (transactionsDone % 2 == 0);
+
+                    if(buy == true){ // buy
+                        ans2 = -prices[day-1] + dp[day - 1][transactionsDone - 1];
+                    }else{ // sell
+                        ans2 = prices[day-1] + dp[day - 1][transactionsDone - 1];
+                    }
+
+                    ans = max(ans1, ans2);
+
+                }
+                
+            }
+        }
+            
+//         for(int day = (int) prices.size();day >= 0;day--){
+//             for(int transactionsLeft = 0;transactionsLeft <= 4;transactionsLeft++){
+//                 cout<<dp[day][transactionsLeft]<<" ";
+//             }
+//                 cout<<endl;
+//         }
+            
+        return dp[prices.size()][4];
     }
 };
