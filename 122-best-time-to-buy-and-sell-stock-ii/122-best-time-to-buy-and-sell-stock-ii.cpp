@@ -2,6 +2,7 @@ class Solution {
 public:
         // TC: O(N)
         // SC:O(1)
+        // Valley - Peak approach
     int maxProfit(vector<int>& prices) {
             ios_base::sync_with_stdio(false);
             cin.tie(NULL);
