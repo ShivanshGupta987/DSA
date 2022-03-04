@@ -1,5 +1,6 @@
 class Solution {
-        // TC : O(N*N)
+        // TC : O(N*M)
+        // N -> no. of books // M -> shelfWidth
         // SC : O(N)
 public:
     int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
