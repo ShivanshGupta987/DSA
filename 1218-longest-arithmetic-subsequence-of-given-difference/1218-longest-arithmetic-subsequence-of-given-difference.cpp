@@ -21,6 +21,7 @@ public:
 
 
 
+// BRUTE FORCE
 
 // class Solution {
 //         // TC : O(N*N)
@@ -29,9 +30,10 @@ public:
 //     int longestSubsequence(vector<int>& arr, int diff) {
         
 //             int n = arr.size();
+//             int ans = 1;
 //             vector<int>dp(n,1);
             
-//             // dp[i] -> length of  longest arithemetic subsequence using first i+1 elements 
+//             // dp[i] -> length of  longest arithemetic subsequence which ends with ith index element, using first i+1 elements 
 //             for(int i=0;i<n;i++){
                     
 //                     int j=i-1;
@@ -42,7 +44,8 @@ public:
 //                             }
 //                             j--;
 //                     }
+//                     ans = max(ans,dp[i]);
 //             }
-//             return dp[n-1];
+//             return ans;
 //     }
 // };
