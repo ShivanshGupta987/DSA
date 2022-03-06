@@ -1,26 +1,53 @@
 class Solution {
+        // TC : O(N*R)  // R : 0 <= ranges[i] <= 100
+        // SC : O(N)
+        
+        const int MAX = 1e5;
         
 public:
     int minTaps(int n, vector<int>& ranges) {
-       int  minn = 0;
-            int maxx=0;
-            int open = 0;
-            int index = 0;
+        
+          
+            vector<int>dp(n+1,MAX);
+            dp[0]=0;
             
-            while(maxx<n){
-                    for(int i=index;i<ranges.size();i++){
-                            if(i-ranges[i]<=minn && i+ranges[i]>maxx){
-                                    maxx = i+ranges[i];
-                                    index = i;
-                            }
+            for(int i=0;i<=n;i++){
+                    for(int j= max(0,i-ranges[i]+1); j<= min(n,i+ranges[i]);j++){
+                            dp[j] = min(dp[j], dp[max(0,i-ranges[i])] +1);
                     }
-                    if(minn == maxx) return -1;
-                    open++;
-                    minn = maxx;
             }
-          return open;
+            
+            return dp[n]== MAX ? -1 : dp[n];
     }
 };
+
+
+// class Solution {
+//        // Worst case -  TC : O(N*N)
+//       // BEST CASE - TC : omega(N)
+        
+//         // SC : O(1)
+// public:
+//     int minTaps(int n, vector<int>& ranges) {
+//             int  minn = 0;
+//             int maxx=0;
+//             int open = 0;
+//             int index = 0;
+            
+//             while(maxx<n){
+//                     for(int i=index;i<ranges.size();i++){
+//                             if(i-ranges[i]<=minn && i+ranges[i]>maxx){
+//                                     maxx = i+ranges[i];
+//                                     index = i;
+//                             }
+//                     }
+//                     if(minn == maxx) return -1;
+//                     open++;
+//                     minn = maxx;
+//             }
+//           return open;
+//     }
+// };
 
 
 
