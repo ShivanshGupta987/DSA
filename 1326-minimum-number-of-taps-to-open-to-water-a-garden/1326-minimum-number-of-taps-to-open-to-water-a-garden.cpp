@@ -1,5 +1,5 @@
 class Solution {
-        // TC : O(N)
+        // TC : O(N log N)
         // SC : O(N)
         #define pii pair<int,int>
 public:
