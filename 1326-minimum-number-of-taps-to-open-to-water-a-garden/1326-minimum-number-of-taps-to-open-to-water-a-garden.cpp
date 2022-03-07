@@ -1,25 +1,69 @@
 class Solution {
-        // TC : O(N*R)  // R : 0 <= ranges[i] <= 100
+        // TC : O(N)
         // SC : O(N)
-        
-        const int MAX = 1e5;
-        
+        #define pii pair<int,int>
 public:
     int minTaps(int n, vector<int>& ranges) {
         
-          
-            vector<int>dp(n+1,MAX);
-            dp[0]=0;
+            vector<pii>input;
             
             for(int i=0;i<=n;i++){
-                    for(int j= max(0,i-ranges[i]+1); j<= min(n,i+ranges[i]);j++){
-                            dp[j] = min(dp[j], dp[max(0,i-ranges[i])] +1);
-                    }
+                    input.push_back(pii(max(0,i-ranges[i]), min(n,i+ranges[i])));
             }
+                           
+            sort(input.begin(),input.end(),[](const pii a,const pii b){return a.first > b.first; });
             
-            return dp[n]== MAX ? -1 : dp[n];
+            int open = 0;
+            int currentReach = 0;
+            while(!input.empty()){
+                    // a gap where no shower can reach
+                    if(input.back().first > currentReach) return -1;
+               
+                    open++; // now at this point one tap will definitely exist which will cover the some portion afterwards currentReach 
+                    
+                    int nextReach = currentReach;
+                    
+                    while(!input.empty() && input.back().first<=currentReach){
+                            nextReach = max(nextReach, input.back().second);
+                            
+                            if(nextReach==n) return open;
+                            
+                            input.pop_back();
+                    }
+                    
+                    currentReach = nextReach;
+            }
+                                    
+            return open;
     }
 };
+
+
+
+
+
+// class Solution {
+//         // TC : O(N*R)  // R : 0 <= ranges[i] <= 100
+//         // SC : O(N)
+        
+//         const int MAX = 1e5;
+        
+// public:
+//     int minTaps(int n, vector<int>& ranges) {
+        
+          
+//             vector<int>dp(n+1,MAX);
+//             dp[0]=0;
+            
+//             for(int i=0;i<=n;i++){
+//                     for(int j= max(0,i-ranges[i]+1); j<= min(n,i+ranges[i]);j++){
+//                             dp[j] = min(dp[j], dp[max(0,i-ranges[i])] +1);
+//                     }
+//             }
+            
+//             return dp[n]== MAX ? -1 : dp[n];
+//     }
+// };
 
 
 // class Solution {
