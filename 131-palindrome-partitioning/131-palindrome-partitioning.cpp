@@ -1,7 +1,7 @@
 class Solution {
 
         // TC : O(N*(2^N))
-        // SC : O(N*N)
+        // SC : O(N)
     vector<vector<string>> ans;
 
 public:
