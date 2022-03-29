@@ -1,7 +1,7 @@
 class Solution {
         // DP APPROACH
         // TC : O(N*N)
-        
+        // N -> s.size()
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         
