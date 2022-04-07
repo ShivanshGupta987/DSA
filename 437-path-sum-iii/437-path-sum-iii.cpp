@@ -25,7 +25,7 @@ public:
             return ans;
     }
         
-        void dfs(TreeNode* root, int target, unordered_map<long long,int> mp, long long pre){
+        void dfs(TreeNode* root, int target, unordered_map<long long,int>& mp, long long pre){
                 
                  if(root==NULL) return;
                  pre += root->val;
@@ -35,5 +35,6 @@ public:
                 mp[pre]++;
                 dfs(root -> left, target , mp , pre);
                 dfs(root -> right, target, mp, pre);
+                mp[pre]--;
         }
 };
