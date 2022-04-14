@@ -9,29 +9,20 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
-// TC : O(N)
-// N -> NO. OF NODES IN THE TREE
 class Solution {
+vector<int>res;
 public:
     vector<int> rightSideView(TreeNode* root) {
-        
-            if(root==NULL)return {};
-            queue<TreeNode*>q;
-            q.push(root);
-            vector<int>res;
-            while(!q.empty())
-            {
-                    for(int i=q.size()-1;i>=0;i--)
-                    {
-                            TreeNode* temp = q.front();
-                            q.pop();
-                            if(i==0)res.push_back(temp->val);
-                            if(temp->left) q.push(temp->left);
-                            if(temp->right) q.push(temp->right);
-                    }
-            }
+  
+            dfs(root,0);
             return res;
-            
     }
+private:
+        void dfs(TreeNode* root, int depth)
+        {
+                if(root==NULL)return;
+                if(depth == res.size()) res.push_back(root->val);
+                dfs(root->right,depth+1);
+                dfs(root->left,depth+1);      
+        }
 };
