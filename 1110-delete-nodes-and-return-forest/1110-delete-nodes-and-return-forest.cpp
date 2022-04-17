@@ -23,7 +23,7 @@ public:
     }
 
 private: 
-        TreeNode* dfs(TreeNode*  node, set<int>& s, bool is_root)
+        TreeNode* dfs(TreeNode*  & node, set<int>& s, bool is_root)
         {
                 if(node == NULL) return NULL;
                 bool deleted = (s.count(node->val)==1);
