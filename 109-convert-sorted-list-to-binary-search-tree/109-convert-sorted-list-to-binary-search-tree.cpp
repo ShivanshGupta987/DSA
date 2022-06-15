@@ -20,33 +20,59 @@
  * };
  */
 // TC : O(N)
-// SC : O(log N)
-// N -> no. of nodes in the linked list
+// SC : O(N)
 class Solution {
 public:
     TreeNode* sortedListToBST(ListNode* head) {
-            return build_BST(0, length(head)-1, head );
-    }
-
-    TreeNode* build_BST(int left, int right,ListNode* &head){
-            if(left > right) return NULL;
-            
-            int mid = left + (right-left)/2;
-            TreeNode* left_subtree = build_BST(left,mid-1,head);
-            TreeNode* root = new TreeNode(head->val);
-            head = head->next;
-            root->left = left_subtree;
-            root->right = build_BST(mid+1,right,head);
-            return root;
-              
-    }
-
-    int length(ListNode* head){
-            int ans = 0;
-            while(head != NULL){
+        
+            vector<int>arr;
+            while(head!=nullptr){
+                    arr.push_back(head->val);
                     head = head->next;
-                    ans++;
             }
-            return ans;
+            return build_BST(arr,0,arr.size()-1);
+            
     }
+
+TreeNode* build_BST(vector<int>&arr, int left, int right){
+        
+        if(left>right) return NULL;
+        int mid = left + (right-left)/2;
+        TreeNode* root = new TreeNode(arr[mid]);
+        root->left = build_BST(arr,left,mid-1);
+        root->right = build_BST(arr,mid+1,right);
+        return root;
+}
 };
+
+// // TC : O(N)
+// // SC : O(log N)
+// // N -> no. of nodes in the linked list
+// class Solution {
+// public:
+//     TreeNode* sortedListToBST(ListNode* head) {
+//             return build_BST(0, length(head)-1, head );
+//     }
+
+//     TreeNode* build_BST(int left, int right,ListNode* &head){
+//             if(left > right) return NULL;
+            
+//             int mid = left + (right-left)/2;
+//             TreeNode* left_subtree = build_BST(left,mid-1,head);
+//             TreeNode* root = new TreeNode(head->val);
+//             head = head->next;
+//             root->left = left_subtree;
+//             root->right = build_BST(mid+1,right,head);
+//             return root;
+              
+//     }
+
+//     int length(ListNode* head){
+//             int ans = 0;
+//             while(head != NULL){
+//                     head = head->next;
+//                     ans++;
+//             }
+//             return ans;
+//     }
+// };
