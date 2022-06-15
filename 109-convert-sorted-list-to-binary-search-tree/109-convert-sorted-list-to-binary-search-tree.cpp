@@ -23,23 +23,20 @@
 // SC : O(log N)
 // N -> no. of nodes in the linked list
 class Solution {
-ListNode* head;
 public:
     TreeNode* sortedListToBST(ListNode* head) {
-            this->head = head;
-            return build_BST(0, length(head)-1);
+            return build_BST(0, length(head)-1, head );
     }
 
-    TreeNode* build_BST(int left, int right){
+    TreeNode* build_BST(int left, int right,ListNode* &head){
             if(left > right) return NULL;
             
             int mid = left + (right-left)/2;
-            TreeNode* left_subtree = build_BST(left,mid-1);
+            TreeNode* left_subtree = build_BST(left,mid-1,head);
             TreeNode* root = new TreeNode(head->val);
             head = head->next;
             root->left = left_subtree;
-            root->right = build_BST(mid+1,right);
-            
+            root->right = build_BST(mid+1,right,head);
             return root;
               
     }
