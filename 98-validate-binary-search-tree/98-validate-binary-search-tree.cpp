@@ -9,33 +9,49 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
 // TC : O(N)
 // SC : O(N)
 class Solution {
-        // INORDER TRAVERSAL METHOD
+TreeNode* pre = NULL;
 public:
     bool isValidBST(TreeNode* root) {
         
-            if(root == NULL ) return true;
-            stack<TreeNode*>s; 
-            TreeNode* pre = NULL;
-            
-            while(root || !s.empty()){                
-                    while(root){
-                            s.push(root);
-                            root = root->left;
-                    }
-                    
-                    root = s.top();
-                    s.pop();
-                    if(pre!= NULL && pre->val >= root->val) return false;
-                    pre = root;
-                    root = root->right;
-            }
-            return true;
-            
+           if(root==NULL)return true;
+            if(!isValidBST(root->left)) return false;
+            if(pre!=NULL && pre->val >= root->val) return false;
+            pre = root;
+            return isValidBST(root->right);
     }
 };
+
+// // TC : O(N)
+// // SC : O(N)
+// class Solution {
+//         // INORDER TRAVERSAL METHOD
+// public:
+//     bool isValidBST(TreeNode* root) {
+        
+//             if(root == NULL ) return true;
+//             stack<TreeNode*>s; 
+//             TreeNode* pre = NULL;
+            
+//             while(root || !s.empty()){                
+//                     while(root){
+//                             s.push(root);
+//                             root = root->left;
+//                     }
+                    
+//                     root = s.top();
+//                     s.pop();
+//                     if(pre!= NULL && pre->val >= root->val) return false;
+//                     pre = root;
+//                     root = root->right;
+//             }
+//             return true;
+            
+//     }
+// };
 
 
 // // TC : O(N)
