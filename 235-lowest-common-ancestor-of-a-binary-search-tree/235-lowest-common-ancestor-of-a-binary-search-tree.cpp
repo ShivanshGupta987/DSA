@@ -21,8 +21,8 @@ public:
         
         if(x>y) swap(x,y); 
           
-        while(!(ans->val > x && ans-> val < y) && (ans->val != x) && (ans->val !=y)){
-                if(x< ans->val && y < ans->val) ans = ans->left;
+        while((ans->val < x || ans-> val > y) && (ans->val != x) && (ans->val !=y)){
+                if(x < ans->val && y < ans->val) ans = ans->left;
                 else ans = ans -> right;
         }
             
