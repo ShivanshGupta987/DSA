@@ -9,13 +9,29 @@
  * };
  */
 class Solution {
+    // ITERATIVE SOLUTION
 public:
     ListNode* reverseList(ListNode* head) {
-        if(!head || !head->next)return head;
-        auto node= reverseList(head->next);
-        head->next->next = head;
-        head->next = nullptr;
-        return node;
-        
+        ListNode* prev = NULL;
+        while(head){
+            ListNode* next = head->next;
+            head->next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
     }
 };
+
+// // RECURSIVE SOLUTION
+
+// class Solution {
+// public:
+//     ListNode* reverseList(ListNode* head) {
+//         if(!head || !head->next)return head;
+//         auto node= reverseList(head->next);
+//         head->next->next = head;
+//         head->next = nullptr;
+//         return node;  
+//     }
+// };
