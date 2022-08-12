@@ -11,16 +11,31 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        int len = 0;
-        auto cur = head;
-        while(cur){
-            len++;
-            cur = cur->next;
+        // SLOW AND FAST POINTER
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while(fast!=NULL && fast->next!=NULL){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        int moves = (len/2);
-        while(moves--){
-            head = head->next;
-        }
-        return head;
+        return slow;
     }
 };
+
+
+// class Solution {
+// public:
+//     ListNode* middleNode(ListNode* head) {
+//         int len = 0;
+//         auto cur = head;
+//         while(cur){
+//             len++;
+//             cur = cur->next;
+//         }
+//         int moves = (len/2);
+//         while(moves--){
+//             head = head->next;
+//         }
+//         return head;
+//     }
+// };
