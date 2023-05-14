@@ -1,7 +1,6 @@
 # Row with max 1s
-## Medium 
-<div class="problem-statement">
-                <p></p><p><span style="font-size:18px">Given a boolean 2D array of n x m dimensions where each row is sorted. Find&nbsp;the&nbsp;0-based index of the first row&nbsp;that has&nbsp;the maximum number of <strong>1's</strong>.</span></p>
+## Medium
+<div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a boolean 2D array of n x m dimensions where each row is sorted. Find&nbsp;the&nbsp;0-based index of the first row&nbsp;that has&nbsp;the maximum number of <strong>1's</strong>.</span></p>
 
 <p><span style="font-size:18px"><strong>Example 1:</strong></span></p>
 
@@ -41,5 +40,4 @@ You don't need to read input or print anything. Your task is to complete the fun
 0 ≤ Arr[i][j]&nbsp;≤ 1&nbsp;</span></p>
 
 <p>&nbsp;</p>
- <p></p>
-            </div>
+</div>
