@@ -10,7 +10,12 @@ public:
         // TC : O(M*N)
         // SC : O(M*N)
         // code here
-        int m = (1<<7);
+        int maxele = INT_MIN;
+        for(auto & x : arr){
+            maxele = max(x,maxele);
+        }
+        int m = (1<<(int)log2(maxele) + 1);
+        if(K>m) return 0;
         vector<vector<int>>dp(n+1,vector<int>(m+1));
         dp[0][0]=1;
         
