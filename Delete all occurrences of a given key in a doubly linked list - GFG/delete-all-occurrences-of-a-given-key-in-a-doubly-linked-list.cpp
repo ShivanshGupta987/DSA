@@ -58,8 +58,7 @@ class Solution {
                 Node* nextone = temp->next;
                 if(prevone)prevone->next = nextone;
                 if(nextone)nextone->prev = prevone;
-                Node* nodeToBeDeleted = temp;
-                delete nodeToBeDeleted;
+                delete temp;
                 temp = nextone;
             }
             else{
