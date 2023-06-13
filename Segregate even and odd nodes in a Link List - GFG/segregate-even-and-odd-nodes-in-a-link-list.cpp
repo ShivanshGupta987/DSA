@@ -48,23 +48,30 @@ public:
         head = dummy;
         Node* first = head; // points at the last even number in segregated list
         Node* temp = head;
-        while(first->next){
-            if(first->next->data % 2 == 0){
-                first = first->next;
-                temp = temp->next;
-            }
-            else break;
-        }
+        // while(first->next){
+        //     if(first->next->data % 2 == 0){
+        //         first = first->next;
+        //         temp = temp->next;
+        //     }
+        //     else break;
+        // }
         while(temp->next!=nullptr){
             if((temp->next->data & 1)==0){
-                // 1st step : Remove the even value node
-                Node* evenNode = temp->next;
-                temp->next = temp->next->next;
+                if(first==temp){
+                    first = first->next;
+                    temp = temp->next;
+                }
+                else{
+                    // 1st step : Remove the even value node
+                    Node* evenNode = temp->next;
+                    temp->next = temp->next->next;
+                    
+                    // 2nd step : Insert the even value node after first node
+                    evenNode->next = first->next;
+                    first->next = evenNode;
+                    first = first->next; 
+                }
                 
-                // 2nd step : Insert the even value node after first node
-                evenNode->next = first->next;
-                first->next = evenNode;
-                first = first->next; 
             }
             else temp = temp->next;
         }
