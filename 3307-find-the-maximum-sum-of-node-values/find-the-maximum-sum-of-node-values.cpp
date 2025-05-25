@@ -1,7 +1,7 @@
 class Solution {
     // TC : O(N)
     // SC : O(N)
-    vector<vector<long long>>dp;
+    long long dp[(int)1e5][2];
 
     long long getMax(vector<int>& nums, int ind, int k, int isEven){
         int n = nums.size();
@@ -21,7 +21,7 @@ class Solution {
 public:
     long long maximumValueSum(vector<int>& nums, int k, vector<vector<int>>& edges) {
         int n = nums.size();
-        dp.resize(n, vector<long long>(2,-1));
+        memset(dp, -1, sizeof dp);
         return getMax(nums,0,k,1);
        
     }
