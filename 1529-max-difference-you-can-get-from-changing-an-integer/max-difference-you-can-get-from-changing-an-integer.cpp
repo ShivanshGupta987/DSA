@@ -33,7 +33,7 @@ public:
             else if(s[i]==b) s[i] = '9';
         }
         int maxi = stoi(s);
-        cout<<maxi<<" "<<mini;
+        // cout<<maxi<<" "<<mini;
         return maxi-mini;
         
     }
