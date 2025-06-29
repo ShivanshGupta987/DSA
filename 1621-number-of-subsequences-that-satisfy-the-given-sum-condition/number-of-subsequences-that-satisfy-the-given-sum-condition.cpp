@@ -1,4 +1,6 @@
 class Solution {
+    // TC : O(n log n)
+    // SC : O(1)
     const long long mod = 1e9+7;
     long long power(long long base, int pow){
         if(pow==0) return 1;
