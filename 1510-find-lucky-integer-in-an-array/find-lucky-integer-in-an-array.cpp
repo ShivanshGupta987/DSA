@@ -1,15 +1,17 @@
 class Solution {
+    int cnt[501];
 public:
     int findLucky(vector<int>& arr) {
-        map<int,int>mp;
+        memset(cnt, 0, sizeof(cnt));
         int n = arr.size();
+        int mx = arr[0];
         for(int i=0;i<n;i++){
-            mp[arr[i]]++;
+            cnt[arr[i]]++;
+            mx = max(mx, arr[i]);
         }
-        int ans = -1;
-        for(auto &[key, value] : mp){
-            if(key==value) ans = key;
+        for(int i=mx; i>=1;i--){
+            if(i==cnt[i]) return i;
         }
-        return ans;
+        return -1;
     }
 };
