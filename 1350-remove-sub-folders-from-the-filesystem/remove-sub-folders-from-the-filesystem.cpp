@@ -27,7 +27,7 @@ class Solution {
         }
         int sz = splits1.size();
         for(int i=0;i<sz;i++){
-            cout<<"("<<splits1[i]<<","<<splits2[i]<<")\n";
+            // cout<<"("<<splits1[i]<<","<<splits2[i]<<")\n";
             if(splits1[i]!=splits2[i]) return false;
         }
         return true;
