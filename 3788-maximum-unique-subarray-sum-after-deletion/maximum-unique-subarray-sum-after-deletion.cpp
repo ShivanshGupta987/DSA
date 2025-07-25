@@ -9,8 +9,8 @@ public:
             if(st.find(num)==st.end()){
                 res = max(res, cur_sum + num);
                 if(num>0) cur_sum += num; 
+                st.insert(num);
             }
-            st.insert(num);
         }
         return res;
     }
