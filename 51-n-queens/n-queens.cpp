@@ -1,13 +1,15 @@
 class Solution {
     // TC : O(N^N)
     vector<vector<string>>res;
-    int dx[8] = {1, -1, -1, 1, 1, 0, -1, 0};
-    int dy[8] = {1, -1, 1, -1, 0, -1, 0, 1};
+    // int dx[8] = {1, -1, -1, 1, 1, 0, -1, 0};
+    // int dy[8] = {1, -1, 1, -1, 0, -1, 0, 1};
+    int dx[3] = {-1, -1, -1};
+    int dy[3] = {-1, 0, 1};
     bool isValid(int x, int y, int n){
         return x>=0 && x<n && y<n && y>=0;
     }
     bool isValidConfig(int row, int col, int n, vector<string>& board){
-        for(int k=0;k<8;k++){
+        for(int k=0;k<3;k++){
             int x = row, y = col;
             while(isValid(x, y, n)){
                 if(board[x][y]=='Q') return false;
