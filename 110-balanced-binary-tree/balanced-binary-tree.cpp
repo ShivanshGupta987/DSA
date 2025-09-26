@@ -11,17 +11,17 @@
  */
 class Solution {
     // TC : O(NO. OF NODES IN TREE)
-    bool ans = true;
+    bool isBalance = true;
     int ht(TreeNode* root){
-        if(root==NULL) return 0;
+        if(root==NULL || !isBalance) return 0;
         int left_ht = ht(root->left);
         int right_ht = ht(root->right);
-        if(abs(right_ht-left_ht)>1) ans = false;
+        if(abs(right_ht-left_ht)>1) isBalance = false;
         return 1 + max(left_ht, right_ht);
     }
 public:
     bool isBalanced(TreeNode* root) {
         ht(root);
-        return ans;
+        return isBalance;
     }
 };
