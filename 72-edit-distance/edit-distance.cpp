@@ -27,7 +27,7 @@ class Solution {
         // ans = min(ans, 1 + rec(i+1, j, word1, word2));
 
         // case 7 (same as case 3): delete at jth pos in word2
-        ans = min(ans, 1 + rec(i, j+1, word1, word2));
+        // ans = min(ans, 1 + rec(i, j+1, word1, word2));
 
         return dp[i][j] = ans;
     }
