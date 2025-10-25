@@ -1,6 +1,6 @@
 class Solution {
     // TC : O(M*N)
-    int dp[2001][2001];
+    vector<vector<int>>dp;
     bool solve(int i, int j, string &s, string &t){
         int n = s.size(), m = t.size();
         if(j==m && i==n) return true;
@@ -11,8 +11,8 @@ class Solution {
             ans |= solve(i+1, j+1, s, t);
         }
         else if(t[j]=='*'){
-            ans |= solve(i+1, j, s, t); // taking '*' eq. to multiple char
-            ans |= solve(i, j+1, s, t); // taking '*' eq. to empty string
+            ans =  solve(i+1, j, s, t) // taking '*' eq. to multiple char
+                || solve(i, j+1, s, t); // taking '*' eq. to empty string
         }
         else if(s[i]==t[j]){
             ans |= solve(i+1, j+1, s, t);
@@ -22,7 +22,8 @@ class Solution {
     }
 public:
     bool isMatch(string s, string p) {
-        memset(dp, -1, sizeof(dp));
+        int n = s.size(), m = p.size();
+        dp = vector<vector<int>>(n+1, vector<int>(m+1, -1));
         return solve(0, 0, s, p);
     }
 };
