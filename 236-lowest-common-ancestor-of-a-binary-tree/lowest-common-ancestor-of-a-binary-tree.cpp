@@ -8,15 +8,17 @@
  * };
  */
 class Solution {
-    // TC : O(NO. OF NODES)
+    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q){
+        if(root==nullptr) return nullptr;
+        TreeNode* found1 = solve(root->left, p, q);
+        TreeNode* found2 = solve(root->right, p, q);
+        if((found1 || found2) && (root==p || root==q)) return root;
+        else if(found1 && found2) return root;
+        else if(root==p || root==q) return root;
+        else return found1!=nullptr? found1:found2;
+    }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root==NULL) return NULL;
-        if(root==p || root==q) return root;
-        TreeNode* left_node = lowestCommonAncestor(root->left, p, q);
-        TreeNode* right_node = lowestCommonAncestor(root->right, p, q);
-        if(left_node && right_node) return root;
-        else if (left_node) return left_node;
-        else return right_node;
+        return solve(root, p, q);
     }
 };
