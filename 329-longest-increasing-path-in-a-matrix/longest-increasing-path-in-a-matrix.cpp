@@ -1,58 +1,33 @@
-// --------------- TOPOLOGICAL SORING --------------
-// IDEA : on creating the edge b/w the node having smaller value and adjacent node having
-// having larger value, no cycle exist in the graph
-// so topological sorting of the graph exist 
-// hence we can apply kahn's topological sorting algorithm 
 class Solution {
-// TC : O(M*N)
-// SC : O(M*N)
-
-int dx[4] = {1, 0, -1, 0};
-int dy[4] = {0, 1, 0, -1};
-bool isValid(int x, int y, int m, int n){
-    return x>=0 && y>=0 && x<m && y<n;
-}
+    // TC : O(M*N)
+    // SC : O(M*N)
+    int dx[4] = {1, 0, -1, 0};
+    int dy[4] = {0, -1, 0, 1};
+    bool isValid(int x, int y, int m, int n){
+        return x>=0 && y>=0 && x<m && y<n;
+    }
+    int solve(int x, int y, vector<vector<int>>& mat, vector<vector<int>>& dp){
+        int m = mat.size(), n = mat[0].size();
+        if(dp[x][y]!=-1) return dp[x][y];
+        int ans = 1;
+        for(int k=0;k<4;k++){
+            int nx = x+dx[k], ny=y+dy[k];
+            if(isValid(nx, ny, m, n) && mat[x][y]<mat[nx][ny]){
+                ans = max(ans, 1 + solve(nx, ny, mat, dp));
+            }
+        }
+        return dp[x][y] = ans;
+    }
 public:
     int longestIncreasingPath(vector<vector<int>>& mat) {
-        
         int m = mat.size(), n = mat[0].size();
-
-        vector<int>indeg(m*n);
-        for(int x=0; x<m; x++){
-            for(int y=0; y<n; y++){
-                for(int k=0; k<4; k++){
-                    int new_x = x + dx[k];
-                    int new_y = y + dy[k];
-                    if(isValid(new_x, new_y, m, n) && mat[x][y] < mat[new_x][new_y]){
-                        indeg[new_x*n + new_y]++;
-                    }
-                }
-            }
-        }
-
-        queue<pair<int,int>>q;
+        vector<vector<int>>dp(m, vector<int>(n, -1));
+        int ans = 1;
         for(int x=0;x<m;x++){
             for(int y=0;y<n;y++){
-                if(indeg[x*n+y]==0)q.push({x,y});
+                ans = max(ans, solve(x,y,mat,dp));
             }
         }
-        int longest_path = 0;
-        while(!q.empty()){
-            longest_path++;
-            int sz = q.size();
-            while(sz--){
-                int x = q.front().first, y = q.front().second;
-                q.pop();
-                for(int k=0;k<4;k++){
-                    int new_x = x + dx[k];
-                    int new_y = y + dy[k];
-                    if(!isValid(new_x, new_y, m, n) || mat[x][y] >= mat[new_x][new_y])continue;
-                    if(--indeg[new_x*n + new_y] == 0){
-                        q.push({new_x, new_y});
-                    }
-                }
-            }
-        }
-        return longest_path;
+        return ans;
     }
 };
