@@ -1,5 +1,5 @@
 class Solution {
-    // TC : O(N)
+    // TC : O(log N)
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
         vector<int>ans(2,-1);
