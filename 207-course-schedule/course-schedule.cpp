@@ -1,32 +1,32 @@
 class Solution {
-    // TC : O(V+E) OR O(N)
-    // SC : O(V+E) OR O(N)
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        int n = numCourses;
-        vector<int>indeg(n);
-        vector<vector<int>>adj(n);
+        vector<int>indeg(numCourses);
+        vector<vector<int>>adj(numCourses);
 
-        for(auto & edge : prerequisites){
-            int u = edge[0], v = edge[1];
+        for(auto prereq : prerequisites){
+            int u = prereq[0], v = prereq[1];
             adj[u].push_back(v);
             indeg[v]++;
         }
 
         queue<int>q;
-        for(int i=0;i<n;i++){
-            if(indeg[i]==0)q.push(i);
-        }
-        int cnt = 0;
-
-        while(!q.empty()){
-            cnt++;
-            int u = q.front();
-            q.pop();
-            for(auto & v : adj[u]){
-                if(--indeg[v]==0) q.push(v);
+        for(int i=0;i<numCourses;i++){
+            if(indeg[i]==0){
+                q.push(i);
             }
         }
-        return cnt==n;
+
+        int cnt = 0;
+        while(!q.empty()){
+            cnt++;
+            int course = q.front();
+            q.pop();
+            for(auto child_course: adj[course]){
+                if(--indeg[child_course]==0) q.push(child_course);
+            }
+        }
+        if(cnt==numCourses)  return true;
+        else return false;
     }
 };
