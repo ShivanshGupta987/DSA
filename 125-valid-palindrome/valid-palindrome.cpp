@@ -9,7 +9,7 @@ public:
        
         while(i<j){
             while(i<n && !isChar(s[i]))i++;
-            while(j>=0 && !isChar(s[j]))j--;
+            while(j>=0 && i<j && !isChar(s[j]))j--;
             if(i<j && tolower(s[i])!=tolower(s[j])) return false;
             i++, j--;
         }
